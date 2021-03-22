@@ -1,0 +1,110 @@
+#By joe Xu
+#ID 1472886
+#A2 Quiz
+#CMPUT 325 section B1
+
+Q1
+
+NOR 
+
+(Lxy|xx(yy)) (Lx|xy) (Lx|x)
+
+(Lx | (Ly | xx(yy) )) (Lx|xy) (Lx|x)
+
+(Ly| (Lx|xy) (Lx|xy) (yy) ) (Lx|x)
+
+(Lx|x(Lx|x)) (Lx|x(Lx|x)) ((Lx|x)(Lx|x))  
+
+(Lx|x(Lx|x)) (Lx|x) ((Lx|x)(Lx|x))  
+
+(Lx|x) (Lx|x) ((Lx|x)(Lx|x))  
+
+(Lx|x) ((Lx|x)(Lx|x))  
+
+(Lx|x) (Lx|x)
+
+(Lx|x)
+
+AOR
+
+(Lxy|xx(yy)) (Lx|xy) (Lx|x)
+
+(Lx | (Ly | xx(yy) )) (Lx|xy) (Lx|x)
+
+(Ly | (Lx|xy) (Lx|xy) (yy) )   (Lx|x)
+
+(Ly | (Lx|xy)y (yy) ) (Lx|x)
+
+(Ly | yy (yy) ) (Lx|x)
+
+(Lx|x) (Lx|x) ((Lx|x) (Lx|x))
+
+(Lx|x) ((Lx|x) (Lx|x))
+
+(Lx|x) ((Lx|x))
+
+(Lx|x)
+
+
+Q2(a)
+
+~x V y 
+
+(Lxy | xTy) ((Lx |xFT)x) y 
+
+(Ly | ((Lx |xFT)x)Ty ) y
+
+((Lx |xFT)x)Ty 
+
+xFTTy
+
+IMP = (Lxy | xFTTy)
+
+
+Q2(b)
+
+(Lxy | xFTTy) TF
+
+TFTTF
+
+FTF
+
+F
+
+(Lxy | xFTTy) FT
+
+FFTTT
+
+TTT 
+
+T
+
+
+(Q3)
+
+
+((lambda xy|  (lambda z| (if (> x y) (+ x z) (+ x y) ) ) ) 4 5) 10
+
+(lambda z| (if (> 4 5) (+ 4 z) (+ 4 5) ) )  10
+
+(if (> 4 5) (+ 4 10) (+ 4 5) ) 
+
+(if F 14 9)
+
+9
+
+result of expression = 9
+
+
+# in CT0
+((lambda xy|  (lambda z| (if (> x y) (+ x z) (+ x y) ) ) ) 4 5) 10
+
+#CT1 = {x->4, y->5} U CT0
+(lambda z| (if (> x y) (+ x z) (+ x y) ) ) 10
+
+# CT2 = {z->10} U CT1
+# CT2 = {z->10, x->4, y->5} U CT0
+if (> x y) (+ x z) (+ x y)
+
+Last context CT2 = {z->10} U CT1
+                 = {z->10, x->4, y->5} U CT0

@@ -9,7 +9,7 @@
     0
     (+ 1 (L_Size (cdr L)))))
 
-; get the params or arguments of a program named f with a specific arg size from program list
+; get the arguments of a program named f with a specific arg size from program list
 ; for example f = 'xor, size = 2, P = '((xor (x y) = (if (equal x y) nil t)))) 
 ; this will return (x y)
 (defun program_params (f size P)
@@ -48,7 +48,7 @@
 
     ))
 
-; calls sub_params untill every x has been replaced by every value in the body 
+; calls sub_params untill every x has been replaced by every value in the body respectively
 ; so if you had x = (w v) value = (1 2) and body = (+ w v)
 ; the function will call itself to solve recursively to get (+ w 2)
 ; then it will call sub params with x = w value = 1 body = (+ w 2)
@@ -71,9 +71,9 @@
 
 ; Takes and expression and program and solves the expresstion by replacing equals with
 ; equals from the program list. This does it using applicative order reduction so 
-; for any user defined expression f (a b c d) it first solves the args (a b c d) by calling 
-; fl-interp on each element in the args. Then solves itself by replaceing equals with equals from the
-; program list P where f = program name AND size of arguments = size of program arguments
+; for any expression f (a b c d) it first solves the args (a b c d) by calling 
+; fl-interp on each element in the args. Then it turns to normal form by replaceing equals with equals from the
+; program list P where f = program name AND size of arguments = size of program arguments. Then the expression is evaluated. 
 ( defun fl-interp (E P)
   (cond 
 	((atom E) E)  
@@ -129,7 +129,7 @@
                         ; if it is not a user defeind function either then return E
                         (if (null (get_Pbody f (L_Size arg) P))       
                             E
-                            ; solve arg and then start replacing the variables with the values in the body
+                            ; solve arg and then reduce to normal form and solve the expression
                             (fl-interp 
                                 (subs (program_params f (L_Size arg) P ) 
                                     (solve_args arg P) 
