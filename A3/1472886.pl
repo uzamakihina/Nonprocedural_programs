@@ -17,7 +17,7 @@ setIntersect([], _, []).
 
 % If the first element in first list is not in the second list move to second element
 setIntersect([S1first| S1Rest], S2, A) :- 
-    \+ memberX(S1first, S2), ! ,
+    \+ memberX(S1first, S2), !,
     setIntersect(S1Rest, S2, A).
 
 % else add first element into return list and move to the next case.
@@ -30,7 +30,7 @@ setIntersect([S1first| S1Rest], S2, [S1first|A]) :-
 swap([],[]).
 
 % return if there is only 1 item in list else swap and go to the rest of the list.
-swap([First|Rest], [First]) :- Rest == [].
+swap([First|Rest], [First]) :- Rest == [], !.
 swap([First, Second |Rest], [Second, First| Ret]) :- swap(Rest, Ret).
 
 
@@ -143,7 +143,6 @@ sub([First | Rest], S, [Front | Rest2]) :-
     sub(First,S,Front),
     sub(Rest,S,Rest2), !.
 
-
 % QUESTION6
 
 % get subsets of a List as defined in the assighnment
@@ -197,36 +196,41 @@ convert_helper([],_,[]).
 convert_helper([First|Rest],In, [First|Ret]):-
     \+ First = q,
     In = 1,
-    convert_helper(Rest, In, Ret), !.
+    convert_helper(Rest, In, Ret).
 
 % if converting and empty, then remove empty
 convert_helper([First|Rest],In, Ret):-
     In = 0,
     First = e,
-    convert_helper(Rest,In, Ret), !.
+    convert_helper(Rest,In, Ret).
 
 % if not q and in conversion mode, convert the char to c
 convert_helper([First|Rest], In, [c|Ret]):-
     In = 0,
     \+ First = q,
-    convert_helper(Rest,In, Ret) , !.
+    \+ First = e,
+    convert_helper(Rest,In, Ret).
 
 % If First is a Q
+
 % if there is another q after this q and we are not in conversion mode, go to conversion mode
 % and move to rest of list.
-convert_helper([_|Rest],In, [q|Ret]):-
+convert_helper([First|Rest],In, [q|Ret]):-
+    First = q,
     In = 0,
-    member(q, Rest),
-    convert_helper(Rest,1, Ret), !.
+    member(q, Rest), !,
+    convert_helper(Rest,1, Ret).
 
 % if there is no matching q then move on to the rest of the list while converting
-convert_helper([_|Rest],In, [q|Ret]):-
+convert_helper([First|Rest],In, [q|Ret]):-
+    First = q,
     In = 0,
     \+ member(q, Rest),
-    convert_helper(Rest,0, Ret), !.
+    convert_helper(Rest,0, Ret).
 
 % if we are already in conversion mode, exit conversion mode and move to next.
-convert_helper([_|Rest],In, [q|Ret]):-
+convert_helper([First|Rest],In, [q|Ret]):-
+    First = q,
     In = 1,
     convert_helper(Rest, 0, Ret).
 
