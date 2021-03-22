@@ -66,7 +66,7 @@ filter([First | Rest], OP, N, [First | Ansr]):- OP = lessThan,
 % if not move to the next 
 filter([First | Rest], OP, N, Ans):- OP = lessThan, 
     number(First),
-    filter(Rest, OP, N, Ans).
+    filter(Rest, OP, N, Ans), !.
 
 % call itself on first and Rest and append the lists together
 filter([First|Rest] , OP, N, Ans) :- 
@@ -118,7 +118,6 @@ countAll(L,X) :-
     rev(Sorted, X), !.
 
 
-
 % QUESTION5
 
 % Base case if Atom is not found in replace list replace it with itself
@@ -143,7 +142,6 @@ sub([First | Rest], S, [Front | Rest2]) :-
 sub([First | Rest], S, [Front | Rest2]) :- 
     sub(First,S,Front),
     sub(Rest,S,Rest2), !.
-
 
 
 % QUESTION6
@@ -182,7 +180,6 @@ findEdges(A, [First | Rest]):-
 findEdges(A, [First | Rest]):- 
     edge(First,A),
     findEdges(A, Rest), !.
-
 
 
 % QUESTION7
