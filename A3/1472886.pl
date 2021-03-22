@@ -3,7 +3,7 @@
 % CMPUT 325 section B1
 % Assighnmnet 3
 
-% Q1.
+% QUESTION1.
 
 % My member function
 memberX(X, [First|_]):-
@@ -25,7 +25,7 @@ setIntersect([S1first| S1Rest], S2, [S1first|A]) :-
     setIntersect(S1Rest, S2, A).
 
 
-% Q2.
+% QUESTION2.
 % base case
 swap([],[]).
 
@@ -34,7 +34,7 @@ swap([First|Rest], [First]) :- Rest == [].
 swap([First, Second |Rest], [Second, First| Ret]) :- swap(Rest, Ret).
 
 
-% Q3.
+% QUESTION3.
 % base case
 filter([], _, _, []).
 
@@ -75,7 +75,7 @@ filter([First|Rest] , OP, N, Ans) :-
     append(Fans, Rans, Ans), !.
 
 
-% Q4
+% QUESTION4
 
 % If X in Y
 in(X,[First| _]) :- X = First, !.
@@ -119,7 +119,7 @@ countAll(L,X) :-
 
 
 
-% Q5
+% QUESTION5
 
 % Base case if Atom is not found in replace list replace it with itself
 findReplacement(Atom, [], Atom).
@@ -146,7 +146,7 @@ sub([First | Rest], S, [Front | Rest2]) :-
 
 
 
-% Q6
+% QUESTION6
 
 % get subsets of a List as defined in the assighnment
 mysubset([], _).
@@ -185,7 +185,7 @@ findEdges(A, [First | Rest]):-
 
 
 
-% Q7
+% QUESTION7
 :- use_module(library(lists)).
 
 % use convert helper where the second parameter tells if the call is in conversion mode or not.
